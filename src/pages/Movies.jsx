@@ -1,10 +1,11 @@
 import { MovieList } from "components/MovieList/MovieList";
 
 export const Movies = () => {
-  const movies = getMovies();
+  const movies = null;
   return (
     <main>
-      <ProductList movies={movies} />
+      <h2>MovieList</h2>
+      <MovieList movies={movies} />
     </main>
   );
 };
