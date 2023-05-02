@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Container, MovieWrapper } from "./MovieList.styled";
 
-export const MovieList = ({ movies }) => {
+ const MovieList = ({ movies }) => {
   return (
     <Container>
       {movies.map((movie) => (
@@ -14,3 +14,5 @@ export const MovieList = ({ movies }) => {
     </Container>
   );
 };
+
+export default MovieList;
