@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-// API_KEY='';?api_key=${API_KEY}
+const API_KEY='7c36d10ef8eae7f493da1fadc9c612a4';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -12,7 +12,7 @@ const Home = () => {
     async function fetchPopularMovies() {
       try {
         setIsLoading(true);
-        const response = await axios.get(`https://api.themoviedb.org/3/trending/all/day`);
+        const response = await axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`);
         setMovies(response.data.results);
         setIsLoading(false);
       } catch (error) {
