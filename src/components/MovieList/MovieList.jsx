@@ -5,10 +5,10 @@ const MovieList = ({ movies }) => {
   return (
     <Container>
        <ul>
-          {movies && movies.map(({ id, title, poster_path }) => (
+          {movies && movies.map(({ id, title, name, poster_path }) => (
             <li key={id}>
               <Link to={`/movies/${id}`}>
-              <h2>{title}</h2>
+              <h2>{title || name}</h2>
               <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />
               </Link>
             </li>
