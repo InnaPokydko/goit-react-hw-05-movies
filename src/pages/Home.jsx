@@ -30,11 +30,14 @@ const Home = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Sory, there is no movies</p>
+        <p>Sorry, there are no movies</p>
       ) : (
         <ul>
           {movies.map(movie => (
-            <li key={movie.id}>{movie.title}</li>
+            <li key={movie.id}>
+              <h2>{movie.title}</h2>
+              <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+            </li>
           ))}
         </ul>
       )}
