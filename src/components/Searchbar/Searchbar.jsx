@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { BsSearch } from 'react-icons/bs';
 import {
   SearchbarBox,
-  FormSearch,
+   FormSearch,
   FormInput,
   SearchBtn,
   SearchBtnLabel,
@@ -35,7 +35,7 @@ const Searchbar = ({ onSubmit }) => {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search movies"
           />
         </FormSearch>
       </Formik>
