@@ -7,20 +7,20 @@ import Reviews from './Reviews/Reviews';
 import Layout from './Layout';
 import NotFound from './NotFound';
 
- const App = () => {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="search/search-movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieDetails />}>
-        <Route path="cast" element={<Cast />} />
-        <Route path="reviews" element={<Reviews />} />
-      </Route>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
 
-export default App
+export default App;

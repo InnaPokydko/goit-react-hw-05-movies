@@ -6,9 +6,7 @@ import {
   Outlet,
   useParams,
   useLocation,
-  Route,
-  Routes,
-} from 'react-router-dom';
+ } from 'react-router-dom';
 import { useRef } from 'react';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
@@ -31,6 +29,9 @@ const MovieDetails = () => {
       try {
         setIsLoading(true);
         const [creditsResponse, reviewsResponse] = await Promise.all([
+          axios.get(
+            `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
+          ),
           axios.get(
             `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`
           ),
@@ -55,21 +56,8 @@ const MovieDetails = () => {
     <>
       <h1>MovieDetails: {movieId}</h1>
       <Link to={backLinkLocationRef.current}>Back</Link>
-      <ul>
-        <li>
-          <NavLink to="cast">Cast</NavLink>
-        </li>
-        <li>
-          <NavLink to="reviews">Reviews</NavLink>
-        </li>
-      </ul>
-      <Routes>
-        <Route path="movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={<Cast credits={credits} />} />
-          <Route path="reviews" element={<Reviews reviews={reviews} />} />
-        </Route>{' '}
-      </Routes>
-      {isLoading && <p>Loading...</p>}
+      
+            {isLoading && <p>Loading...</p>}
       {error && <p>Something went wrong.</p>}
       {movie && (
         <div>
@@ -80,6 +68,14 @@ const MovieDetails = () => {
             src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             alt={movie.title}
           />
+          <ul>
+        <li>
+          <NavLink to="cast">Cast</NavLink>
+        </li>
+        <li>
+          <NavLink to="reviews">Reviews</NavLink>
+        </li>
+      </ul>
         </div>
       )}
        <Outlet />
