@@ -6,7 +6,7 @@ import {
   Outlet,
   useParams,
   useLocation,
- } from 'react-router-dom';
+} from 'react-router-dom';
 import { useRef } from 'react';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
@@ -52,40 +52,52 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-  return (
+    return (
     <>
-      <h1>MovieDetails: {movieId}</h1>
       <Link to={backLinkLocationRef.current}>Back</Link>
-      
-            {isLoading && <p>Loading...</p>}
+      {isLoading && <p>Loading...</p>}
       {error && <p>Something went wrong.</p>}
       {movie && (
         <div>
           <h2>{movie.title}</h2>
           <p>{movie.overview}</p>
-          <p>Release date: {movie.release_date}</p>
+          <p>
+            {movie.genres &&
+              movie.genres.map(genre => (
+                <span key={genre.id}>{genre.name} </span>
+              ))}
+          </p>
           <img
             src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             alt={movie.title}
           />
           <ul>
-        <li>
-          <NavLink to="cast">Cast</NavLink>
-        </li>
-        <li>
-          <NavLink to="reviews">Reviews</NavLink>
-        </li>
-      </ul>
+  <li>
+  <NavLink to="cast">Cast</NavLink>
+            </li>
+            <li>
+              <NavLink to="reviews">Reviews</NavLink>
+  </li>
+</ul>
+          {credits && <Cast credits={credits} />}
+          {reviews && <Reviews reviews={reviews} />}
+          <Outlet />
         </div>
       )}
-       <Outlet />
+      <Outlet />
     </>
   );
 };
 
 export default MovieDetails;
 
-/* <Route path="movies/:movieId" element={<MovieDetails />}>
-        <Route path="cast" element={<Cast credits={credits} />} />
-        <Route path="reviews" element={<Reviews reviews={reviews} />} />
-      </Route> */
+
+
+
+// const updateCredits = event => {
+//   setCredits(event.target.value);
+// };
+
+// const updateReviews = event => {
+//   setReviews(event.target.value);
+// };
