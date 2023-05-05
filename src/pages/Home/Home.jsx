@@ -4,8 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {
   Container,
-  Title,
-  MoviesPopular,
+    MoviesPopular,
   MovieCard,
   MoviePoster,
   MovieTitle,
@@ -39,8 +38,7 @@ const Home = () => {
 
   return (
     <>
-    <Title>Popular movies</Title>
-    <Container>
+        <Container>
       
       {isLoading ? (
         <p>Loading...</p>

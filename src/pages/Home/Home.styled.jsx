@@ -12,7 +12,7 @@ export const Title = styled.h1`
   text-align: center;
   font-size: 2rem;
   text-transform: uppercase;
-  color: #D41872;
+  color: white;
   margin-top: 20px;
   margin-bottom: 20px;
 `;
