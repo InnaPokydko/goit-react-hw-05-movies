@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import MovieList from 'components/MovieList/MovieList';
+import Searchbar from 'components/Searchbar/Searchbar';
+import { MoviesBox } from './Movie.styled';
+
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
@@ -33,14 +36,17 @@ const Movies = () => {
     setSearchParams({ movieId: movieIdValue });
   };
 
+  const handleSearchSubmit = searchValue => {
+    setSearchParams({ movieId: searchValue });
+  };
+
   const visibleMovies = movies.filter(movie => movie.title.toLowerCase().includes(movieId.toLowerCase()));
 
   return (
-    <div>
-      <h2>Movies</h2>
-      <input type="text" value={movieId} onChange={updateQueryString} />
+    <MoviesBox>
+        <Searchbar onSubmit={handleSearchSubmit} type="text" value={movieId} onChange={updateQueryString} />
       <MovieList movies={visibleMovies} location={location} />
-    </div>
+    </MoviesBox>
   );
 };
 

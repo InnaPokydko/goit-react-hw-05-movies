@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
-import { Container } from "./MovieList.styled";
+import { Container, List, Item, Title, Poster } from "./MovieList.styled";
 
 const MovieList = ({ movies }) => {
   return (
     <Container>
-      <ul>
+      <List>
         {movies.map(({ id, title, name, poster_path }) => (
-          <li key={id}>
-            <Link to={`/movies/${id}`}>
-              <h2>{title || name}</h2>
-              <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />
+          <Item key={id}>
+            <Link to={`/movies/${id}`}>              
+              <Poster src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} width={320}/>
+              <Title>{title || name}</Title>            
             </Link>
-          </li>
+          </Item>
         ))}
-      </ul>
+      </List>
     </Container>
   );
 };

@@ -17,7 +17,7 @@ const MovieDetails = () => {
   const location = useLocation();
   const [credits, setCredits] = useState(null);
   const [reviews, setReviews] = useState(null);
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -52,13 +52,17 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-    return (
+  return (
     <>
       <Link to={backLinkLocationRef.current}>Back</Link>
       {isLoading && <p>Loading...</p>}
       {error && <p>Something went wrong.</p>}
       {movie && (
         <div>
+          <img
+            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+            alt={movie.title}
+          />
           <h2>{movie.title}</h2>
           <p>{movie.overview}</p>
           <p>
@@ -67,18 +71,14 @@ const MovieDetails = () => {
                 <span key={genre.id}>{genre.name} </span>
               ))}
           </p>
-          <img
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-            alt={movie.title}
-          />
           <ul>
-  <li>
-  <NavLink to="cast">Cast</NavLink>
+            <li>
+              <NavLink to="cast">Cast</NavLink>
             </li>
             <li>
               <NavLink to="reviews">Reviews</NavLink>
-  </li>
-</ul>
+            </li>
+          </ul>
           {credits && <Cast credits={credits} />}
           {reviews && <Reviews reviews={reviews} />}
           <Outlet />
@@ -90,14 +90,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-
-
-
-// const updateCredits = event => {
-//   setCredits(event.target.value);
-// };
-
-// const updateReviews = event => {
-//   setReviews(event.target.value);
-// };

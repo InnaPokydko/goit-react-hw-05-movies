@@ -1,5 +1,15 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import {
+  Container,
+  Title,
+  MoviesPopular,
+  MovieCard,
+  MoviePoster,
+  MovieTitle,
+} from './Home.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
@@ -9,6 +19,7 @@ const Home = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    AOS.init();
     async function fetchPopularMovies() {
       try {
         setIsLoading(true);
@@ -27,27 +38,31 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
-      <h1>Popular movies</h1>
+    <>
+    <Title>Popular movies</Title>
+    <Container>
+      
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Sorry, there are no movies</p>
       ) : (
-        <ul>
+        <MoviesPopular>
           {movies &&
             movies.map(({ id, title, name, poster_path }) => (
-              <li key={id}>
-                <h2>{title || name}</h2>
-                <img
+              <MovieCard key={id} data-aos="fade-left">
+                <MoviePoster
                   src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
                   alt={title}
+                  width={320}
                 />
-              </li>
+                <MovieTitle>{title || name}</MovieTitle>
+              </MovieCard>
             ))}
-        </ul>
+        </MoviesPopular>
       )}
-    </main>
+    </Container>
+    </>
   );
 };
 

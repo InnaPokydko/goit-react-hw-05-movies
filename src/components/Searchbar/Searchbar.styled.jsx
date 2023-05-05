@@ -12,10 +12,7 @@ height: 40px;
   justify-content: center;
   align-items: center;
  
-  padding-right: 24px;
-  padding-left: 24px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 8px;
   color: #fff;
   background-image: linear-gradient(15deg, #13547a 0%, #26a0da 100%);
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
