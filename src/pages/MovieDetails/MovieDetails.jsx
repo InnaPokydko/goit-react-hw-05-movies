@@ -1,11 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {
-   NavLink,
-  Outlet,
-  useParams,
-  useLocation,
-} from 'react-router-dom';
+import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
@@ -15,8 +10,8 @@ const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
 const MovieDetails = () => {
   const location = useLocation();
-  const [credits, setCredits] = useState(null);
-  const [reviews, setReviews] = useState(null);
+  const [credits, setCredits] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [movie, setMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -28,6 +23,7 @@ const MovieDetails = () => {
     const fetchMovieDetails = async () => {
       try {
         setIsLoading(true);
+        if (!movieId) return;
         const [creditsResponse, reviewsResponse] = await Promise.all([
           axios.get(
             `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
@@ -64,25 +60,27 @@ const MovieDetails = () => {
             alt={movie.title}
           />
           <MovDetBox>
-          <h2>{movie.title}</h2>
-          <p>{movie.overview}</p>
-          <p>
-            {movie.genres &&
-              movie.genres.map(genre => (
-                <span key={genre.id}>{genre.name} </span>
-              ))}
-          </p>
-          <ul>
-            <li>
-              <NavLink to="cast">Cast</NavLink>
-            </li>
-            <li>
-              <NavLink to="reviews">Reviews</NavLink>
-            </li>
-          </ul>
+            <h2>{movie.title}</h2>
+            <p>{movie.overview}</p>
+            <p>
+              {movie.genres &&
+                movie.genres.map(genre => (
+                  <span key={genre.id}>{genre.name} </span>
+                ))}
+            </p>
+            <ul>
+              <li>
+                <NavLink to="cast">Cast</NavLink>
+              </li>
+              <li>
+                <NavLink to="reviews">Reviews</NavLink>
+              </li>
+            </ul>
           </MovDetBox>
-          {credits && <Cast credits={credits} />}
-          {reviews && <Reviews reviews={reviews} />}
+          <div>
+            {credits && <Cast credits={credits} />}
+            {reviews && <Reviews reviews={reviews} />}
+          </div>
           <Outlet />
         </Container>
       )}

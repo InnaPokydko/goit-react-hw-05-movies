@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { useRef } from 'react';
 import MovieList from 'components/MovieList/MovieList';
 import Searchbar from 'components/Searchbar/Searchbar';
 import { MoviesBox } from './Movie.styled';
-
+import { StyledBtnLink } from 'pages/MovieDetails/MovieDetails.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
@@ -13,10 +14,12 @@ const Movies = () => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const movieId = searchParams.get('movieId') ?? '';
+  const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+        if (!movieId) return;
         const response = await axios.get(
           `https://api.themoviedb.org/3/search/movie?query=${movieId}&api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
         );
@@ -43,10 +46,13 @@ const Movies = () => {
   const visibleMovies = movies.filter(movie => movie.title.toLowerCase().includes(movieId.toLowerCase()));
 
   return (
+    <>
+    <StyledBtnLink to={backLinkLocationRef.current}>Go back</StyledBtnLink>
     <MoviesBox>
-        <Searchbar onSubmit={handleSearchSubmit} type="text" value={movieId} onChange={updateQueryString} />
-      <MovieList movies={visibleMovies} location={location} />
-    </MoviesBox>
+    <Searchbar onSubmit={handleSearchSubmit} type="text" value={movieId} onChange={updateQueryString} />
+  <MovieList movies={visibleMovies} location={location} />
+</MoviesBox></>
+    
   );
 };
 
