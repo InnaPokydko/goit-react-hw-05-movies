@@ -6,6 +6,7 @@ width: 100%;
 margin: 50px;
 padding: 20px;
 display: flex;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 `;
@@ -41,9 +42,17 @@ width: 700px;
 
 padding: 20px;
 display: flex;
-flex-direction: column;
 gap: 50px;
 flex-wrap: wrap;
 justify-content: flex-start;
 align-items: left;
+`;
+
+export const DetailsBox = styled.ul`
+width: 700px;
+padding: 10px;
+display: flex;
+gap: 15px;
+flex-wrap: wrap;
+
 `;

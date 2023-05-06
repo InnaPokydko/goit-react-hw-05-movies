@@ -1,17 +1,17 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
 
 const Reviews = ({ reviews, movieId }) => {
   return (
     <div>
       {reviews && reviews.length > 0 ? (
-        reviews.map(({ id, content, updated_at }) => (
+        reviews.map(({ id, author, content, updated_at }) => (
           <div key={id}>
-             <Link to={`/movies/${movieId}/reviews`}>
+            <Link to={`/movies/${movieId}/reviews`}>
+            <h3>Author: {author}</h3>
               <p>{updated_at}</p>
               <p>{content}</p>
-              
-              </Link>
-              <Outlet />
+            </Link>
+            <Outlet />
           </div>
         ))
       ) : (
@@ -22,12 +22,6 @@ const Reviews = ({ reviews, movieId }) => {
 };
 
 export default Reviews;
-
-
-
-
-
-
 
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
@@ -77,7 +71,6 @@ export default Reviews;
 
 // export default Reviews;
 
-
 // import { Link } from 'react-router-dom';
 
 // const Reviews = () => {
@@ -125,8 +118,3 @@ export default Reviews;
 // };
 
 // export default Reviews;
-
-
-
-
-

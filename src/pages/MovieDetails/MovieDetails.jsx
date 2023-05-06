@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useParams, useLocation, Outlet } from 'react-router-dom';
+import { NavLink, useParams, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
-import { Container, StyledBtnLink, MovDetBox } from './MovieDetails.styled';
+import {
+  Container,
+  StyledBtnLink,
+  MovDetBox,
+  DetailsBox,
+} from './MovieDetails.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
@@ -14,7 +19,7 @@ const MovieDetails = () => {
   const [reviews, setReviews] = useState(null);
   const location = useLocation();
   const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
-  const [visibleComponent, setVisibleComponent] = useState('cast');
+  const [visibleComponent, setVisibleComponent] = useState('');
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -44,7 +49,7 @@ const MovieDetails = () => {
     return <p>Loading...</p>;
   }
 
-  const handleVisibleComponent = (component) => {
+  const handleVisibleComponent = component => {
     setVisibleComponent(component);
   };
 
@@ -54,12 +59,17 @@ const MovieDetails = () => {
       <Container>
         <MovDetBox>
           <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : 'https://cdn.pixabay.com/photo/2018/03/22/02/37/background-3249063_960_720.png'
+            }
             alt={movie.title}
+            width={400}
           />
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
-          <ul>
+          <DetailsBox>
             <li>
               <NavLink
                 to={`/movies/${movieId}/cast`}
@@ -76,18 +86,25 @@ const MovieDetails = () => {
                 Reviews
               </NavLink>
             </li>
-          </ul>
+          </DetailsBox>
         </MovDetBox>
-
-        {visibleComponent === 'cast' && <Cast credits={credits} movieId={movieId} />}
-        {visibleComponent === 'reviews' && <Reviews reviews={reviews} movieId={movieId} />}
-        <Outlet />
+        {visibleComponent === 'cast' && (
+          <Cast credits={credits} movieId={movieId} />
+        )}
+        {visibleComponent === 'reviews' && (
+          <Reviews reviews={reviews} movieId={movieId} />
+        )}
       </Container>
     </>
   );
 };
 
 export default MovieDetails;
+
+
+
+
+
 
 // import axios from 'axios';
 // import { useEffect, useState } from 'react';

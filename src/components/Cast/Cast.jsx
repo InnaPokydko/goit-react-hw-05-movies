@@ -1,46 +1,31 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
+import { Container, CastBox, Name } from './Cast.styled';
 
 const Cast = ({ credits, movieId }) => {
   return (
-    <div>
+    <Container>
       {credits &&
         credits.map(({ id, name, character, profile_path }) => (
-          <div key={id}>
+          <CastBox key={id}>
             <Link to={`/movies/${movieId}/cast`}>
-              <h3>{name}</h3>
-              <p>Character: {character}</p>
               {profile_path && (
                 <img
                   src={`https://image.tmdb.org/t/p/w200${profile_path}`}
                   alt={name}
-                  width={320}
+                  width={180}
                 />
               )}
-              
-           </Link>
-           <Outlet />
-          </div>
+              <Name>{name}</Name>
+              <Name>Character: {character}</Name>
+            </Link>
+           { movieId === id && <Outlet />}
+          </CastBox>
         ))}
-    </div>
+    </Container>
   );
 };
 
 export default Cast;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
@@ -92,6 +77,3 @@ export default Cast;
 // };
 
 // export default Cast;
-
-
-
