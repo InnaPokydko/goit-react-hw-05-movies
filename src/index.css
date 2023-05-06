@@ -14,9 +14,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: linear-gradient(15deg, #13547a 0%, #26a0da 100%);
-  
-    background-size: cover;
+  /* background-image: linear-gradient(15deg, #13547a 0%, #26a0da 100%); */
+  /* background-image: url(https://t3.ftcdn.net/jpg/05/87/67/18/1200_F_587671890_6QyhXq8d3IzWDq8iaZkAt7F2WQsD4pX0.jpg);    */
+  background-image: linear-gradient(to top, rgb(193, 223, 196) 0%, rgb(222, 236, 221) 100%); 
+  background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
 }

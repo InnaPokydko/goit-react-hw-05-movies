@@ -11,7 +11,8 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-image: linear-gradient(to right, #FFA17F 0%, #00223E 51%, #FFA17F 100%);
+  background-image: linear-gradient(to right, #134E5E 0%, #71B280 51%, #134E5E 100%);
+  // background-image: linear-gradient(to right, #FFA17F 0%, #00223E 51%, #FFA17F 100%);
   // background-image: linear-gradient(15deg, #13547a 0%, #26a0da 100%);
 `;
 

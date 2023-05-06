@@ -38,7 +38,7 @@ font-size: 1.5rem;
 margin-top: 10px;
 margin-bottom: 0;
 align-items: center;
-color: #ECE9E6;
+color: #134E5E;
 `;
 
 export const TitleBox = styled.div`
