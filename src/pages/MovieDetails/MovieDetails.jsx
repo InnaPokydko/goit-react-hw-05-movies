@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
-  Link,
-  NavLink,
+   NavLink,
   Outlet,
   useParams,
   useLocation,
@@ -10,6 +9,7 @@ import {
 import { useRef } from 'react';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
+import { Container, StyledBtnLink, MovDetBox } from './MovieDetails.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
@@ -54,15 +54,16 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Link to={backLinkLocationRef.current}>Back</Link>
+      <StyledBtnLink to={backLinkLocationRef.current}>Go back</StyledBtnLink>
       {isLoading && <p>Loading...</p>}
       {error && <p>Something went wrong.</p>}
       {movie && (
-        <div>
+        <Container>
           <img
             src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             alt={movie.title}
           />
+          <MovDetBox>
           <h2>{movie.title}</h2>
           <p>{movie.overview}</p>
           <p>
@@ -79,10 +80,11 @@ const MovieDetails = () => {
               <NavLink to="reviews">Reviews</NavLink>
             </li>
           </ul>
+          </MovDetBox>
           {credits && <Cast credits={credits} />}
           {reviews && <Reviews reviews={reviews} />}
           <Outlet />
-        </div>
+        </Container>
       )}
       <Outlet />
     </>

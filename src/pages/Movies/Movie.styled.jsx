@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 
 export const MoviesBox = styled.div`
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+    margin: 40px;
   padding: 20px;
   display: flex;
-  flex-direction: center;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
