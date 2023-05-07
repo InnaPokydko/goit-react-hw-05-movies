@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { NavLink, useParams, useLocation } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import { NavLink, useParams, useLocation, Outlet } from 'react-router-dom';
 import { useRef } from 'react';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
@@ -8,6 +8,7 @@ import {
   StyledBtnLink,
   MovDetBox,
   DetailsBox,
+  
 } from './MovieDetails.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
@@ -88,12 +89,17 @@ const MovieDetails = () => {
             </li>
           </DetailsBox>
         </MovDetBox>
+        
         {visibleComponent === 'cast' && (
           <Cast credits={credits} movieId={movieId} />
         )}
         {visibleComponent === 'reviews' && (
           <Reviews reviews={reviews} movieId={movieId} />
         )}
+        
+        <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
       </Container>
     </>
   );

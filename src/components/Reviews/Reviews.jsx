@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
+import { ReviewsBox } from './Reviews.styled';
 
 const Reviews = ({ reviews, movieId }) => {
   return (
-    <div>
-      {reviews && reviews.length > 0 ? (
+    <ReviewsBox>
+      {reviews && 
         reviews.map(({ id, author, content, updated_at }) => (
           <div key={id}>
             <Link to={`/movies/${movieId}/reviews`}>
@@ -12,13 +14,12 @@ const Reviews = ({ reviews, movieId }) => {
               <p>{updated_at}</p>
               <p>{content}</p>
             </Link>
-            <Outlet />
+            <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+        </Suspense>
           </div>
-        ))
-      ) : (
-        <p>No reviews available.</p>
-      )}
-    </div>
+        ))}
+    </ReviewsBox>
   );
 };
 
@@ -30,8 +31,7 @@ Reviews.propTypes = {
       content: PropTypes.string.isRequired,
       updated_at: PropTypes.string.isRequired,
     })
-  ),
-  movieId: PropTypes.string.isRequired,
+  )
 };
 
 export default Reviews;

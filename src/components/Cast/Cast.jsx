@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 import { Container, CastBox, Name } from './Cast.styled';
 
 const Cast = ({ credits, movieId }) => {
@@ -19,7 +20,9 @@ const Cast = ({ credits, movieId }) => {
               <Name>{name}</Name>
               <Name>Character: {character}</Name>
             </Link>
-           { movieId === id && <Outlet />}
+           { movieId === id && <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+        </Suspense>}
           </CastBox>
         ))}
     </Container>
@@ -34,8 +37,7 @@ Cast.propTypes = {
       character: PropTypes.string.isRequired,
       profile_path: PropTypes.string,
     })
-  ),
-  movieId: PropTypes.string.isRequired,
+  )
 };
 
 export default Cast;
