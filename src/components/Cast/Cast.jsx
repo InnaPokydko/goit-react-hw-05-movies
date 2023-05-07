@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
 import { Container, CastBox, Name } from './Cast.styled';
 
@@ -23,6 +24,18 @@ const Cast = ({ credits, movieId }) => {
         ))}
     </Container>
   );
+};
+
+Cast.propTypes = {
+  credits: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      character: PropTypes.string.isRequired,
+      profile_path: PropTypes.string,
+    })
+  ),
+  movieId: PropTypes.string.isRequired,
 };
 
 export default Cast;

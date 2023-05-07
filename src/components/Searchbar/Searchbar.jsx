@@ -14,6 +14,7 @@ const initialValues = {
 };
 
 const Searchbar = ({ onSubmit }) => {
+  
   const handleSubmit = (values, actions) => {
     onSubmit(values.search);
     actions.resetForm();

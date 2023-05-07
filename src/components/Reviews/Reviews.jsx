@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
 
 const Reviews = ({ reviews, movieId }) => {
@@ -19,6 +20,18 @@ const Reviews = ({ reviews, movieId }) => {
       )}
     </div>
   );
+};
+
+Reviews.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      updated_at: PropTypes.string.isRequired,
+    })
+  ),
+  movieId: PropTypes.string.isRequired,
 };
 
 export default Reviews;
