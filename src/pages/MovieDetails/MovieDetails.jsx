@@ -56,6 +56,7 @@ const MovieDetails = () => {
   return (
     <>
       <StyledBtnLink to={backLinkLocationRef.current}>Go back</StyledBtnLink>
+  {console.log(backLinkLocationRef)}
       <Container>
         <MovDetBox>
           <img
