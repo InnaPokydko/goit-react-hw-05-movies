@@ -2,13 +2,10 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import MovieList from 'components/MovieList/MovieList';
 import {
   Container,
-    MoviesPopular,
-  MovieCard,
-  MoviePoster,
-  MovieTitle,
-} from './Home.styled';
+    } from './Home.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
@@ -45,19 +42,7 @@ const Home = () => {
       ) : error ? (
         <p>Sorry, there are no movies</p>
       ) : (
-        <MoviesPopular>
-          {movies &&
-            movies.map(({ id, title, name, poster_path }) => (
-              <MovieCard key={id} data-aos="fade-left">
-                <MoviePoster
-                  src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                  alt={title}
-                  width={320}
-                />
-                <MovieTitle>{title || name}</MovieTitle>
-              </MovieCard>
-            ))}
-        </MoviesPopular>
+        <MovieList movies={movies}/>
       )}
     </Container>
     </>
@@ -65,3 +50,23 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
+
+// (
+//   <MoviesPopular>
+//     {movies &&
+//       movies.map(({ id, title, name, poster_path }) => (
+//         <MovieCard key={id} data-aos="fade-left">
+//           <MoviePoster
+//             src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+//             alt={title}
+//             width={320}
+//           />
+//           <MovieTitle>{title || name}</MovieTitle>
+//         </MovieCard>
+//       ))}
+//   </MoviesPopular>
+// )
