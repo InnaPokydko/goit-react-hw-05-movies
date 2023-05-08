@@ -17,7 +17,8 @@ padding: 15px;
 `;
 
 export const Poster = styled.img`
-  width: 100%;
+
+width: 100%;
 `;
 
 export const Item = styled.li`
@@ -28,6 +29,7 @@ align-items: center;
 border: 1px solid #ccc;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 padding: 15px;
+background: #fff;
  
   :hover {
     transform: scale(1.05);
@@ -35,11 +37,13 @@ padding: 15px;
 `;
 
 export const Title = styled.h2`
+text-align: center;
+font-family: 'Ubuntu';
 font-size: 1.5rem;
 margin-top: 10px;
 margin-bottom: 0;
 align-items: center;
-color: #134E5E;
+color: black;
 `;
 
 export const TitleBox = styled.div`

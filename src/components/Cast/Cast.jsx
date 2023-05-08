@@ -3,7 +3,7 @@
 import { Container, CastBox, Name } from './Cast.styled';
 
 const defImg =
-  'https://images01.nicepagecdn.com/page/37/32/web-page-design-preview-373292.jpg';
+  'https://img.freepik.com/premium-vector/cartoon-film-camera-with-sign-that-says-movie-it_133260-5246.jpg';
 
 const Cast = ({ credits, movieId }) => {
   return (
@@ -95,3 +95,5 @@ export default Cast;
 // };
 
 // export default Cast;
+
+

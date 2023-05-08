@@ -17,11 +17,12 @@ padding: 4px;
 display: flex;
 gap: 15px;
 flex-direction: column;
+align-items: center;
 `;
 
 export const Name = styled.h3`
 text-align: center;
-    color: #000;
+    color:#fff;
     
   font-size: 18px;
   line-height: 24px;

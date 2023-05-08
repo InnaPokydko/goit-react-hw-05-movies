@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
-import { ReviewsBox, Text} from './Reviews.styled';
+import { ReviewsBox, Text, NotFoundText, H3} from './Reviews.styled';
 
 const Reviews = ({ reviews, movieId }) => {
   return (
@@ -9,13 +9,13 @@ const Reviews = ({ reviews, movieId }) => {
         reviews.map(({ id, author, content }) => (
           <div key={id}>
            
-              <h3>Author: {author}</h3>
+              <H3>Author: {author}</H3>
               <Text>{content}</Text>
             
           </div>
         ))
       ) : (
-        <p>No reviews available</p>
+        <NotFoundText>No reviews available</NotFoundText>
       ))}
     </ReviewsBox>
   );

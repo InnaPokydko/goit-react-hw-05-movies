@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import MovieList from 'components/MovieList/MovieList';
 import Searchbar from 'components/Searchbar/Searchbar';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { MoviesBox } from './Movie.styled';
 import { StyledBtnLink } from 'pages/MovieDetails/MovieDetails.styled';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,7 +27,6 @@ const Movies = () => {
         setMovies(response.data.results);
       } catch (error) {
         toast.error(error.message);
-        console.error(error);
       }
     };
     fetchMovies();
@@ -35,10 +34,14 @@ const Movies = () => {
 
   const updateQueryString = evt => {
     const searchValue = evt.target.value;
-    if (searchValue === '') {
-      return setSearchParams({});
+    if (!searchValue) {
+      toast.error('Error Notification !', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      console.log(searchValue);
+    } else {
+      setSearchParams({ movieId: searchValue });
     }
-    setSearchParams({ movieId: searchValue });
   };
 
   const handleSearchSubmit = searchValue => {
@@ -60,6 +63,7 @@ const Movies = () => {
           value={searchMovie}
           onChange={updateQueryString}
         />
+        <ToastContainer />
         <MovieList movies={visibleMovies} />
       </MoviesBox>
     </>

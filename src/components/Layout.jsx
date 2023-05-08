@@ -1,19 +1,19 @@
 import {  Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
-import { MainContainer, Header, Link, Footer } from './Layout.styled';
+import { MainContainer, Header, HeaderBox, Link, Footer } from './Layout.styled';
 
 const Layout = () => {
   return (
     <MainContainer>
       <Header>
-        <ul>
+        <HeaderBox>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/search/search-movies">Movies</Link>
           </li>
-        </ul>
+        </HeaderBox>
       </Header>
             <main>
             <Suspense fallback={<div>Loading...</div>}>

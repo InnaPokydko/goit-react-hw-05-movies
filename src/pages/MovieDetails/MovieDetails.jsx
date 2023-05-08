@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense } from 'react';
-import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
+import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { useRef } from 'react';
 import { toast } from 'react-toastify';
 import Cast from 'components/Cast/Cast';
@@ -9,6 +9,8 @@ import {
   StyledBtnLink,
   MovDetBox,
   DetailsBox,
+  InfoDetails,
+  StyledDeteileLink,
 } from './MovieDetails.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
@@ -67,37 +69,41 @@ const MovieDetails = () => {
             src={
               movie.poster_path
                 ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : 'https://cdn.pixabay.com/photo/2018/03/22/02/37/background-3249063_960_720.png'
+                : 'https://img.freepik.com/premium-vector/cartoon-film-camera-with-sign-that-says-movie-it_133260-5246.jpg'
             }
             alt={movie.title}
-            width={400}
+            width={320}
           />
-          <h1>{movie.title}</h1>
+          <InfoDetails>
+            <h1>{movie.title}</h1>
+          <h2>Overview</h2>
           <p>{movie.overview}</p>
+          <h2>Genres</h2>
           <p>
             {movie.genres &&
               movie.genres.map(genre => (
                 <span key={genre.id}>{genre.name} </span>
               ))}
-          </p>
+          </p></InfoDetails>
+          
           <DetailsBox>
             <li>
-              <Link
+              < StyledDeteileLink
                 to={`/movies/${movieId}/cast`}
                 onClick={() => handleVisibleComponent('cast')}
                 style={{ display: movie.poster_path ? 'block' : 'none' }}
               >
                 Cast
-              </Link>
+              </ StyledDeteileLink>
             </li>
             <li>
-              <Link
+              <StyledDeteileLink
                 to={`/movies/${movieId}/reviews`}
                 onClick={() => handleVisibleComponent('reviews')}
                 style={{ display: movie.poster_path ? 'block' : 'none' }}
               >
                 Reviews
-              </Link>
+              </StyledDeteileLink>
             </li>
           </DetailsBox>
         </MovDetBox>
@@ -127,5 +133,8 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
+
+
+
 
 
