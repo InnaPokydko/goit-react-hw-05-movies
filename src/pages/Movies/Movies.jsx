@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import {  useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import MovieList from 'components/MovieList/MovieList';
 import Searchbar from 'components/Searchbar/Searchbar';
+import { toast } from 'react-toastify';
 import { MoviesBox } from './Movie.styled';
 import { StyledBtnLink } from 'pages/MovieDetails/MovieDetails.styled';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
@@ -12,7 +14,7 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchMovie, setSearchMovie] = useState(
-    searchParams.get('movieId') ?? '',
+    searchParams.get('movieId') ?? ''
   );
 
   useEffect(() => {
@@ -24,6 +26,7 @@ const Movies = () => {
         );
         setMovies(response.data.results);
       } catch (error) {
+        toast.error(error.message);
         console.error(error);
       }
     };
@@ -49,16 +52,16 @@ const Movies = () => {
 
   return (
     <>
-    <StyledBtnLink to="/">Go Back</StyledBtnLink>
+      <StyledBtnLink to="/">Go Back</StyledBtnLink>
       <MoviesBox>
-              <Searchbar
+        <Searchbar
           onSubmit={handleSearchSubmit}
           type="text"
           value={searchMovie}
           onChange={updateQueryString}
         />
         <MovieList movies={visibleMovies} />
-          </MoviesBox>
+      </MoviesBox>
     </>
   );
 };

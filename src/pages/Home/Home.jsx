@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import MovieList from 'components/MovieList/MovieList';
-import { toast } from 'react-toastify';
 import { Container } from './Home.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
@@ -24,7 +23,6 @@ const Home = () => {
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
-        toast.error(error.message);
         console.log(error);
       }
     }
