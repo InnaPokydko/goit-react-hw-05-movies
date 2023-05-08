@@ -1,31 +1,39 @@
 import PropTypes from 'prop-types';
-import { Link, useLocation } from 'react-router-dom';
-import { Container, List, Item, Title, Poster } from './MovieList.styled';
+import {  useLocation } from 'react-router-dom';
+import { Container, List, Item, Title, Poster, MovieLink } from './MovieList.styled';
+
+const defImg =
+  'https://images01.nicepagecdn.com/page/37/32/web-page-design-preview-373292.jpg';
 
 const MovieList = ({ movies }) => {
   const location = useLocation();
+
   return (
     <Container>
       <List>
-        {movies.map(({ id, title, name, poster_path }) => (
-          <Item key={id}>
-            <Link to={`/movies/${id}`} state={{ from: location }}>
-              <Poster
-                src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                alt={title}
-                width={320}
-              />
+        {movies.map(({ id, title, name, poster_path }) => {
+          const imgSrc = poster_path
+            ? `https://image.tmdb.org/t/p/w500${poster_path}`
+            : defImg;
 
-              <Title>{title || name}</Title>
-            </Link>
-          </Item>
-        ))}
+          return (
+            <Item key={id}>
+              <MovieLink to={`/movies/${id}`} state={{ from: location }}>
+                <Poster
+                  src={imgSrc}
+                  alt={title || name}
+                  width={320}
+                  id={id}
+                />
+                <Title>{title || name}</Title>
+              </MovieLink>
+            </Item>
+          );
+        })}
       </List>
     </Container>
   );
 };
-
-export default MovieList;
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(
@@ -37,3 +45,10 @@ MovieList.propTypes = {
     }).isRequired
   ).isRequired,
 };
+
+export default MovieList;
+
+
+
+
+

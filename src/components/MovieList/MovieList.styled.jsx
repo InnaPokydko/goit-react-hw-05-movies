@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
 width: 100%;
@@ -52,3 +53,8 @@ bottom: 0;
 width: 100%; 
 opacity: 0; 
 transition: opacity 0.2s ease-in-out;`
+
+export const MovieLink = styled(Link)`
+text-decoration: none;
+color: inherit;
+`;

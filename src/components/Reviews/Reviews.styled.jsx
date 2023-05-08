@@ -15,3 +15,13 @@ export const ReviewItem = styled.li`
   box-shadow: 0px 1px 2px rgb(255 158 0 / 40%), 0px 2px 4px rgb(255 0 245 / 30%),
     0px 4px 8px rgb(255 221 0 / 40%), 0px 4px 16px rgb(255 247 254 / 10%);
 `;
+
+export const Text = styled.p`
+font-family: 'Roboto';
+color: #000;
+    font-size: 14px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 100;
+
+`;

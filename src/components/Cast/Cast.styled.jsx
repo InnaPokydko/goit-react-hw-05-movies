@@ -22,7 +22,7 @@ flex-direction: column;
 export const Name = styled.h3`
 text-align: center;
     color: #000;
-    font-family: inherit;
+    
   font-size: 18px;
   line-height: 24px;
   font-style: normal;

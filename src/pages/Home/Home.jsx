@@ -3,16 +3,14 @@ import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import MovieList from 'components/MovieList/MovieList';
-import {
-  Container,
-    } from './Home.styled';
+import { toast } from 'react-toastify';
+import { Container } from './Home.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     AOS.init();
@@ -25,8 +23,8 @@ const Home = () => {
         setMovies(response.data.results);
         setIsLoading(false);
       } catch (error) {
-        setError(true);
         setIsLoading(false);
+        toast.error(error.message);
         console.log(error);
       }
     }
@@ -35,25 +33,14 @@ const Home = () => {
 
   return (
     <>
-        <Container>
-      
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>Sorry, there are no movies</p>
-      ) : (
-        <MovieList movies={movies}/>
-      )}
-    </Container>
+      <Container>
+        {isLoading ? <p>Loading...</p> : <MovieList movies={movies} />}
+      </Container>
     </>
   );
 };
 
 export default Home;
-
-
-
-
 
 // (
 //   <MoviesPopular>

@@ -1,44 +1,47 @@
-import PropTypes from 'prop-types';
-import { Link, Outlet } from 'react-router-dom';
-import { Suspense } from 'react';
+// import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
 import { Container, CastBox, Name } from './Cast.styled';
+
+const defImg =
+  'https://images01.nicepagecdn.com/page/37/32/web-page-design-preview-373292.jpg';
 
 const Cast = ({ credits, movieId }) => {
   return (
     <Container>
       {credits &&
-        credits.map(({ id, name, character, profile_path }) => (
-          <CastBox key={id}>
-            <Link to={`/movies/${movieId}/cast`}>
-              {profile_path && (
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${profile_path}`}
-                  alt={name}
-                  width={180}
-                />
-              )}
-              <Name>{name}</Name>
-              <Name>Character: {character}</Name>
-            </Link>
-           { movieId === id && <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-        </Suspense>}
-          </CastBox>
+        (credits.length > 0 ? (
+          credits.map(({ id, name, character, profile_path }) => {
+            const imgSrc = profile_path
+              ? `https://image.tmdb.org/t/p/w500${profile_path}`
+              : defImg;
+            return (
+              <CastBox key={id}>
+                
+                  <img src={imgSrc} alt={name} width={180} />
+                  <Name>{name}</Name>
+                  <Name>Character: {character}</Name>
+               
+              </CastBox>
+            );
+          })
+        ) : (
+          <p>No cast</p>
         ))}
     </Container>
   );
 };
 
-Cast.propTypes = {
-  credits: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      character: PropTypes.string.isRequired,
-      profile_path: PropTypes.string,
-    })
-  )
-};
+// Cast.propTypes = {
+//   credits: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       name: PropTypes.string.isRequired,
+//       character: PropTypes.string.isRequired,
+//       profile_path: PropTypes.string,
+//     })
+//   ),
+//   movieId: PropTypes.number.isRequired,
+// };
 
 export default Cast;
 
