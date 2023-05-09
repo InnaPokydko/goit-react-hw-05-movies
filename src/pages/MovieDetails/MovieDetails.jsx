@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { useRef } from 'react';
 import { toast } from 'react-toastify';
+import ReactPlayer from 'react-player';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
 import {
@@ -11,6 +12,7 @@ import {
   DetailsBox,
   InfoDetails,
   StyledDeteileLink,
+  GenresBox,
 } from './MovieDetails.styled';
 
 const API_KEY = '7c36d10ef8eae7f493da1fadc9c612a4';
@@ -20,6 +22,7 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
   const [reviews, setReviews] = useState(null);
+  const [trailer, setTrailer] = useState(null);
   const location = useLocation();
   const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
   const [visibleComponent, setVisibleComponent] = useState('');
@@ -44,6 +47,13 @@ const MovieDetails = () => {
         );
         const reviewsData = await reviewsResponse.json();
         setReviews(reviewsData.results);
+        const trailerResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`
+        );
+        const trailerData = await trailerResponse.json();
+        if (trailerData.results.length > 0) {
+          setTrailer(trailerData.results[0]);
+        }
       } catch (error) {
         toast.error(error.message);
       }
@@ -76,25 +86,35 @@ const MovieDetails = () => {
           />
           <InfoDetails>
             <h1>{movie.title}</h1>
-          <h2>Overview</h2>
-          <p>{movie.overview}</p>
-          <h2>Genres</h2>
-          <p>
-            {movie.genres &&
-              movie.genres.map(genre => (
-                <span key={genre.id}>{genre.name} </span>
-              ))}
-          </p></InfoDetails>
-          
+            <h2>Overview</h2>
+            <p>{movie.overview}</p>
+            <h2>Genres</h2>
+            <GenresBox>
+              {movie.genres &&
+                movie.genres.map(genre => (
+                  <span key={genre.id}>{genre.name} </span>
+                ))}
+            </GenresBox>
+          </InfoDetails>
+
+          {trailer && (
+            <ReactPlayer
+              url={`https://www.youtube.com/watch?v=${trailer.key}`}
+              controls={true}
+              width={640}
+              height={360}
+              style={{ margin: '20px 0' }}
+            />
+          )}
           <DetailsBox>
             <li>
-              < StyledDeteileLink
+              <StyledDeteileLink
                 to={`/movies/${movieId}/cast`}
                 onClick={() => handleVisibleComponent('cast')}
                 style={{ display: movie.poster_path ? 'block' : 'none' }}
               >
                 Cast
-              </ StyledDeteileLink>
+              </StyledDeteileLink>
             </li>
             <li>
               <StyledDeteileLink
@@ -133,8 +153,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-
-
-
-

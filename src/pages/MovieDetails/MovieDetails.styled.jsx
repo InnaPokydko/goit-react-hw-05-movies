@@ -83,3 +83,10 @@ export const StyledDeteileLink = styled(Link)`
     background-image: linear-gradient(to right, #FFB75E 0%, #ED8F03 51%, #FFB75E 100%);
   }
 `;
+
+export const GenresBox = styled.div`
+display: flex;
+flex-direction: column;
+gap: 15px;
+color: #fff;
+`;
