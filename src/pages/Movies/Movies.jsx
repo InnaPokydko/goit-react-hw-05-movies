@@ -26,7 +26,9 @@ const Movies = () => {
         );
         setMovies(response.data.results);
       } catch (error) {
-        toast.error(error.message);
+        toast.error('Error Notification !', {
+          theme: 'colored',
+        });
       }
     };
     fetchMovies();
@@ -34,11 +36,11 @@ const Movies = () => {
 
   const updateQueryString = evt => {
     const searchValue = evt.target.value;
-    if (!searchValue) {
+    if (!searchValue || searchValue === '') {
       toast.error('Error Notification !', {
-        position: toast.POSITION.TOP_CENTER,
+        theme: 'colored',
       });
-      console.log(searchValue);
+      return;
     } else {
       setSearchParams({ movieId: searchValue });
     }
@@ -63,7 +65,7 @@ const Movies = () => {
           value={searchMovie}
           onChange={updateQueryString}
         />
-        <ToastContainer />
+        <ToastContainer autoClose={3000} limit={1} />
         <MovieList movies={visibleMovies} />
       </MoviesBox>
     </>
