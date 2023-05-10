@@ -35,6 +35,7 @@ padding: 4px 8px;
   &:hover {
     background-image: linear-gradient(to right, #FFB75E 0%, #ED8F03 51%, #FFB75E 100%);
   }
+ 
 `;
 
 export const MovDetBox = styled.div`

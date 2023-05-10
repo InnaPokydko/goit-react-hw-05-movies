@@ -65,7 +65,7 @@ const Movies = () => {
           value={searchMovie}
           onChange={updateQueryString}
         />
-        <ToastContainer autoClose={3000} limit={1} />
+        <ToastContainer position="top-center" autoClose={3000} limit={1} />
         <MovieList movies={visibleMovies} />
       </MoviesBox>
     </>

@@ -15,6 +15,7 @@ export const Title = styled.h1`
   color: white;
   margin-top: 20px;
   margin-bottom: 20px;
+  
 `;
 
 export const MoviesPopular = styled.ul`
